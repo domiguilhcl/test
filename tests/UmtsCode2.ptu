@@ -1,0 +1,165 @@
+--********************************************************************************
+--%c attolstart "src\UmtsCode.c" "tests\UmtsCode2.ptu" -INCL=".,src,tests" -DEFINE="_ATL_PREPRO_ONLY" 
+--
+--%d DATE : 2005
+--********************************************************************************
+HEADER UmtsCode, 1.0,
+
+--------------------------------------------------------------------------------
+--
+-- TESTED FILE INCLUDE DIRECTIVES 
+--
+--------------------------------------------------------------------------------
+
+##include "UmtsCode.h"
+--------------------------------------------------------------------------------
+--
+-- TESTED FILE DECLARATIONS 
+--
+--------------------------------------------------------------------------------
+
+-- Declarations of the global variables of the tested file
+
+--------------------------------------------------------------------------------
+
+BEGIN
+
+--------------------------------------------------------------------------------
+-- Declaration of the service code_int
+--------------------------------------------------------------------------------
+SERVICE code_int
+SERVICE_TYPE extern
+
+    -- Tested service parameters declarations
+    #int x;
+    #char buffer[200];
+
+
+    TEST 1
+    FAMILY nominal
+   REQUIREMENT 1032
+
+        ELEMENT
+         VAR x,		init = 3,		ev = init 
+         VAR buffer,		init = "",		ev = "I13"
+         #code_int(x, buffer);
+        END ELEMENT
+
+    END TEST -- TEST 1
+
+    TEST 2
+    FAMILY nominal 
+ REQUIREMENT 1033
+
+        ELEMENT 
+         VAR x,		init = 34,		ev = init  
+         VAR buffer,		init = "",		ev = "I243" 
+         #code_int(x, buffer); 
+        END ELEMENT 
+ 
+    END TEST -- TEST 2 
+ 
+ 
+-- Rational Test RealTime demo 
+-- Uncomment the following TEST 
+-- To cover more blocks of source code 
+-- Beware, that the test will fail
+--    TEST 3 
+--    FAMILY nominal  
+  
+--        ELEMENT  
+--         VAR x,		init = 0,		ev = init   
+--         VAR buffer,		init = "",		ev = "I10"  
+--         #code_int(x, buffer);  
+--        END ELEMENT  
+  
+--    END TEST -- TEST 3  
+
+END SERVICE -- code_int
+
+SERVICE decode_int 
+SERVICE_TYPE extern 
+ 
+    -- Tested service parameters declarations 
+    #int x; 
+    #char buffer[200]; 
+    #char *ret;
+    #int j;
+ 
+    TEST 1 
+    FAMILY nominal 
+ 
+        ELEMENT 
+         VAR x,		init = 0,		ev = 3
+         VAR buffer,		init = "I13",		ev ==
+         VAR ret, 	init==,	ev=&buffer[3]
+         #for (j=0; j < 10000; j++) ret=decode_int(&x, buffer); 
+        END ELEMENT 
+ 
+    END TEST -- TEST 1 
+  
+    TEST 2  
+    FAMILY nominal  
+  
+        ELEMENT  
+         VAR buffer,		init in {"I243","I265","I287"},		ev ==
+         VAR x,		init = 0,		ev(buffer) in {34,56,78}
+         VAR ret, 	init==,	ev=&buffer[4] 
+          #for (j=0; j < 10000; j++) ret=decode_int(&x, buffer); 
+        END ELEMENT  
+  
+    END TEST -- TEST 2  
+ 
+END SERVICE -- decode_int 
+ 
+ 
+-------------------------------------------------------------------------------- 
+-- Declaration of the service code_string 
+-------------------------------------------------------------------------------- 
+SERVICE code_string 
+SERVICE_TYPE extern 
+ 
+    -- Tested service parameters declarations 
+    #char str[200]; 
+    #char buffer[200]; 
+ 
+    TEST 1 
+    FAMILY nominal 
+ 
+        ELEMENT 
+         VAR str,		init = "hello",		ev = init  
+         VAR buffer,		init = "",		ev = "S5hello" 
+         #code_string(str, buffer); 
+        END ELEMENT 
+ 
+    END TEST -- TEST 1 
+ 
+END SERVICE -- code_int 
+ 
+SERVICE decode_string
+SERVICE_TYPE extern  
+  
+    -- Tested service parameters declarations  
+    #char str[200];  
+    #char buffer[200];  
+    #char *ret; 
+  
+    TEST 1  
+    FAMILY nominal  
+  
+        ELEMENT  
+         VAR str,		init ="",		ev ="hello"
+         VAR buffer,		init = "S5hello",		ev == 
+         VAR ret, 	init==,	ev=&buffer[7] 
+         #ret=decode_string(str, buffer);  
+        END ELEMENT  
+  
+    END TEST -- TEST 1  
+   
+END SERVICE -- decode_int  
+  
+ 
+
+
+
+
