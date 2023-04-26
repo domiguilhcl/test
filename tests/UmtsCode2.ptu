@@ -50,6 +50,8 @@ SERVICE_TYPE extern
     TEST 2
     FAMILY nominal 
  REQUIREMENT 1033
+ REQUIREMENT 1032
+
 
         ELEMENT 
          VAR x,		init = 34,		ev = init  
