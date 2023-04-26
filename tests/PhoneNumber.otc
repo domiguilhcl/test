@@ -21,9 +21,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Class PhoneNumber
  
-CLASS PhoneNumber
+CLASS PhoneNumber 
 {
-
+ 
 	// Invariants
 
 	INVARIANT (! (isFull() & isEmpty()) ); 
