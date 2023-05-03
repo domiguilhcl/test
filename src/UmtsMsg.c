@@ -6,8 +6,7 @@
  *  IBM Rational Test RealTime
  *  (c) Copyright IBM Corp. 2003-2007 All Rights Reserved.
  *
- *  US Governement Users Restricted Rights - Use, duplication or
- *  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ *  US Governement Users Restricted Rights - Use, d
  */
 
 
@@ -82,4 +81,5 @@ void UmtsMsg_decode(UmtsMsg **msg_ptr, char *buffer)
    ptr=decode_int(&(msg->baseStationId),ptr);
   }
 }
+
 
