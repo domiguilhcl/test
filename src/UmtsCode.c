@@ -7,7 +7,7 @@
  *  (c) Copyright IBM Corp. 2003-2007 All Rights Reserved.
  *
  *  US Governement Users Restricted Rights - Use, duplication or
- *  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ *  disclosure restricted by GSA ADP Schedule Contract with IBM Co
  */
 
 
@@ -127,5 +127,6 @@ char *decode_string(char *str, char *buffer)
  str[idx]=(char)0;
  return(buffer);    
 }    
+
 
 
